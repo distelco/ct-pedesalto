@@ -1,0 +1,69 @@
+dnl Process this file with autoconf to produce a configure script.
+AC_INIT(plc-version)
+AM_CONFIG_HEADER(config.h)
+
+MMAJOR=1
+MMINOR=4
+MSUBMINOR=2
+INTERFACE_AGE=0
+VERSION=$MMAJOR.$MMINOR.$MSUBMINOR
+
+AC_SUBST(MMAJOR)
+AC_SUBST(MMINOR)
+AC_SUBST(MSUBMINOR)
+AC_SUBST(INTERFACE_AGE)
+AC_SUBST(VERSION)
+
+AC_CANONICAL_HOST
+AC_CANONICAL_TARGET
+
+AM_INIT_AUTOMAKE(plc, $VERSION)
+
+AC_PROG_MAKE_SET
+
+dnl Checks for programs.
+AC_PROG_RANLIB
+AC_PROG_CC
+AC_LANG_C
+
+
+AC_MSG_CHECKING([whether to build debug version (no optimization)])
+dnl See if the user wants aggressive optimizations of the code
+AC_ARG_ENABLE(debug,
+  [  --enable-debug          build debug version (no optimization) [default=no]],
+  [debug=yes], [debug=no])
+if test x$debug = xyes; then
+    AC_MSG_RESULT([yes])
+    CFLAGS="$CFLAGS -ggdb -O0 -DDEBUG -D_DEBUG"
+else
+    AC_MSG_RESULT([no])
+    CFLAGS="$CFLAGS -UDEBUG -U_DEBUG"
+fi
+CFLAGS="$CFLAGS -Wall"
+
+AC_CHECK_LIB(pthread, pthread_create)
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_HEADER_SYS_WAIT
+AC_CHECK_HEADERS(fcntl.h sys/ioctl.h sys/time.h syslog.h unistd.h)
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_C_CONST
+
+dnl Checks for library functions.
+AC_FUNC_MMAP
+AC_FUNC_SETPGRP
+AC_CHECK_FUNCS(gettimeofday socket)
+
+AC_OUTPUT([
+Makefile
+version.h
+ct/Makefile
+commands/Makefile  
+common/Makefile 
+devices/Makefile 
+drivers/Makefile
+comunication/Makefile
+modbus/Makefile
+])

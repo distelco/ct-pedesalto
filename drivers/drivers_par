@@ -1,0 +1,3 @@
+driver_type	autovideo	0
+
+driver_block	autovideo	0	/home/francon/progetti/plc/drivers/atv/atv1.cfg

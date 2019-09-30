@@ -1,0 +1,14 @@
+CVS/
+autom4te.cache/
+
+*.o
+*.ko
+*.obj
+*.elf
+
+*.lib
+*.a
+*.la
+*.lo
+
+config.h.in~

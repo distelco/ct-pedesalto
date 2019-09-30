@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+
+strip cl1d cl2d
+echo "kill running process..."
+ssh root@cl2  /etc/init.d/cl stop
+sleep 1
+echo "copying file..."
+scp cl1d root@cl2:/usr/bin/cl1d
+scp cl2d root@cl2:/usr/bin/cl2d
+sleep 1
+echo "restaring program.."
+ssh root@cl2 /etc/init.d/cl start
+echo "done."
+
+

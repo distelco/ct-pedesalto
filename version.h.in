@@ -1,0 +1,4 @@
+#define VMAJOR @MMAJOR@
+#define VMINOR @MMINOR@
+#define VSUBMINOR @MSUBMINOR@
+#define VBUILD 1

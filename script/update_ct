@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+
+strip ctd
+echo "kill running process..."
+ssh root@ct  /etc/init.d/ct stop
+sleep 1
+echo "copying file..."
+scp ctd root@ct:/usr/bin/ctd
+sleep 2
+echo "restaring program.."
+ssh root@ct /etc/init.d/ct start
+echo "done."
+
+

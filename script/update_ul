@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+UL=$1
+
+if [ $UL. == . ] ;then
+    echo "uso : update_ul <UL>"
+    exit 0
+fi
+strip uld
+echo "kill running process..."
+ssh root@$UL  /etc/init.d/ul stop
+sleep 1
+echo "copying file..."
+scp uld root@$UL:/usr/bin/uld
+sleep 1
+echo "restaring program.."
+ssh root@$UL /etc/init.d/ul start
+echo "done."
+
+
